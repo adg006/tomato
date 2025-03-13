@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { assets } from "../../assets/assets.js";
 
 import "./navbar.css";
@@ -11,30 +12,34 @@ export default function Navbar() {
       <img src={assets.logo} alt="" className="logo" />
 
       <ul className="navbar-menu">
-        <li
+        <Link
+          to="/"
           onClick={() => setMenu("home")}
           className={menu === "home" ? "active" : ""}
         >
           home
-        </li>
-        <li
+        </Link>
+        <a
+          href="#explore-menu"
           onClick={() => setMenu("menu")}
           className={menu === "menu" ? "active" : ""}
         >
           menu
-        </li>
-        <li
+        </a>
+        <a
+          href="#app-download"
           onClick={() => setMenu("app")}
           className={menu === "app" ? "active" : ""}
         >
           app
-        </li>
-        <li
+        </a>
+        <a
+          href="#footer"
           onClick={() => setMenu("contact")}
           className={menu === "contact" ? "active" : ""}
         >
           contact
-        </li>
+        </a>
       </ul>
 
       <div className="navbar-right">
