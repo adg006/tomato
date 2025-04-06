@@ -5,6 +5,7 @@ import Login from "./components/login/Login";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import Cart from "./pages/cart/Cart";
+import Order from "./pages/order/Order";
 
 export default function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -16,6 +17,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/order" element={<Order />}></Route>
         </Routes>
       </div>
       <Footer />
