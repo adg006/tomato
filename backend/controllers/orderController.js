@@ -91,4 +91,29 @@ const userOrders = async (req, res) => {
   }
 };
 
-export { placeOrder, orderVerify, userOrders };
+// Function to list all orders
+const listOrders = async (req, res) => {
+  try {
+    const orders = await orderModel.find({});
+    res.json({ success: true, data: orders });
+  } catch (error) {
+    console.error(error);
+    res.json({ success: false, message: "Error" });
+  }
+};
+
+// Function to update trackings
+const updateStatus = async (req, res) => {
+  try {
+    await orderModel.findByIdAndUpdate(req.body.orderId, {
+      status: req.body.status,
+    });
+
+    res.json({ success: true, message: "Staus updated" });
+  } catch (error) {
+    console.error(error);
+    res.json({ success: false, message: "Error" });
+  }
+};
+
+export { placeOrder, orderVerify, userOrders, listOrders, updateStatus };
