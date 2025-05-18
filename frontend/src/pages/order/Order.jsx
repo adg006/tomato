@@ -1,4 +1,5 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { StoreContext } from "../../context/StoreContext";
 import "./order.css";
@@ -6,6 +7,8 @@ import "./order.css";
 const Order = () => {
   const { getTotalCartAmount, token, food_list, cartItems, url } =
     useContext(StoreContext);
+
+  const navigate = useNavigate();
 
   // State to hold the order data
   const [data, setdata] = useState({
@@ -50,8 +53,6 @@ const Order = () => {
       headers: { token },
     });
 
-    console.log(response.data);
-
     if (response.data.success) {
       const { session_url } = response.data;
       window.location.replace(session_url);
@@ -59,6 +60,15 @@ const Order = () => {
       alert("Something went wrong");
     }
   };
+
+  // Check if the user is logged in and has items in the cart
+  useEffect(() => {
+    if (!token) {
+      navigate("/cart");
+    } else if (getTotalCartAmount() === 0) {
+      navigate("/cart");
+    }
+  }, [token]);
 
   return (
     <form onSubmit={placeOrder} className="place-order">

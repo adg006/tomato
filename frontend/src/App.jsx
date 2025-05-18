@@ -7,6 +7,7 @@ import Footer from "./components/footer/Footer";
 import Cart from "./pages/cart/Cart";
 import Order from "./pages/order/Order";
 import Verify from "./pages/verify/Verify";
+import MyOrders from "./pages/myOrders/MyOrders";
 
 export default function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/order" element={<Order />} />
           <Route path="/verify" element={<Verify />} />
+          <Route path="/myorders" element={<MyOrders />} />
         </Routes>
       </div>
       <Footer />
