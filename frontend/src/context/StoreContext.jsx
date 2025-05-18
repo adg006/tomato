@@ -11,11 +11,13 @@ export default function StoreContextProvider(props) {
 
   const url = "http://localhost:4000";
 
+  // Fetch food list from the server
   const fetchFoodList = async () => {
     const response = await axios.get(`${url}/api/food/list`);
     setFoodList(response.data.data);
   };
 
+  // Fetch food list and cart data when token is available
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -28,13 +30,15 @@ export default function StoreContextProvider(props) {
 
       if (localStorage.getItem("token")) {
         setToken(localStorage.getItem("token"));
+        await loadCartData(localStorage.getItem("token"));
       }
     };
 
     loadData();
   }, []);
 
-  const addToCart = (itemId) => {
+  // Function to add items to the cart
+  const addToCart = async (itemId) => {
     if (!cartItems[itemId]) {
       setCartItems((prev) => ({
         ...prev,
@@ -46,12 +50,40 @@ export default function StoreContextProvider(props) {
         [itemId]: prev[itemId] + 1,
       }));
     }
+
+    if (token) {
+      await axios.post(
+        `${url}/api/cart/add`,
+        { itemId },
+        { headers: { token } }
+      );
+    }
   };
 
-  const removeFromCart = (itemId) => {
+  // Function to remove items from the cart
+  const removeFromCart = async (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+
+    if (token) {
+      await axios.post(
+        `${url}/api/cart/remove`,
+        { itemId },
+        { headers: { token } }
+      );
+    }
   };
 
+  // Function to load cart data from the server
+  const loadCartData = async (token) => {
+    const response = await axios.post(
+      `${url}/api/cart/get`,
+      {},
+      { headers: { token } }
+    );
+    setCartItems(response.data.cartData);
+  };
+
+  // Function to get the total amount of the cart
   const getTotalCartAmount = () => {
     let total = 0;
 
@@ -71,6 +103,7 @@ export default function StoreContextProvider(props) {
     setCartItems,
     addToCart,
     removeFromCart,
+    loadCartData,
     getTotalCartAmount,
     url,
     token,
