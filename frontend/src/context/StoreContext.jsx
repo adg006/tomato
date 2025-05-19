@@ -8,7 +8,7 @@ export default function StoreContextProvider(props) {
   const [food_list, setFoodList] = useState([]);
   const [token, setToken] = useState();
 
-  const url = "http://localhost:4000";
+  const url = "https://tomato-backend-hyy6.onrender.com";
 
   // Fetch food list from the server
   const fetchFoodList = async () => {
