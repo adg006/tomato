@@ -3,7 +3,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Navbar from "./components/navbar/Navbar.jsx";
-import Sidebar from "./components/Sidebar/Sidebar.jsx";
+import Sidebar from "./components/sidebar/Sidebar.jsx";
 import Add from "./pages/add/Add.jsx";
 import List from "./pages/list/List.jsx";
 import Orders from "./pages/orders/Orders.jsx";
