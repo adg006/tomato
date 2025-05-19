@@ -29,7 +29,7 @@ const registerUser = async (req, res) => {
     }
 
     // Check if the password is strong
-    if (password.length <= 8) {
+    if (password.length < 7) {
       return res.json({
         success: false,
         message: "Password must be at least 8 characters long.",
