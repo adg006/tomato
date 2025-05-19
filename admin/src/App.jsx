@@ -9,7 +9,7 @@ import List from "./pages/list/List.jsx";
 import Orders from "./pages/orders/Orders.jsx";
 
 const App = () => {
-  const url = "http://localhost:4000";
+  const url = "https://tomato-backend-hyy6.onrender.com";
 
   return (
     <div>
