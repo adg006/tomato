@@ -26,4 +26,5 @@ Tomato is designed to provide users with a seamless experience for browsing menu
 - MongoDB (with Mongoose)
 - JSON Web Tokens (JWT)
 - Bcrypt for password hashing
-
+- Multer
+- Stripe for payment integration
