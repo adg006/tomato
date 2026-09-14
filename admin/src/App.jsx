@@ -9,7 +9,9 @@ import List from "./pages/list/List.jsx";
 import Orders from "./pages/orders/Orders.jsx";
 
 const App = () => {
-  const url = "https://tomato-backend-hyy6.onrender.com";
+  const url =
+    import.meta.env.VITE_BACKEND_URL ||
+    "https://tomato-backend-ten.vercel.app";
 
   return (
     <div>

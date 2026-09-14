@@ -8,12 +8,19 @@ export default function StoreContextProvider(props) {
   const [food_list, setFoodList] = useState([]);
   const [token, setToken] = useState();
 
-  const url = import.meta.env.VITE_BACKEND_URL;
+  const url =
+    import.meta.env.VITE_BACKEND_URL ||
+    "https://tomato-backend-ten.vercel.app";
 
   // Fetch food list from the server
   const fetchFoodList = async () => {
-    const response = await axios.get(`${url}/api/food/list`);
-    setFoodList(response.data.data);
+    try {
+      const response = await axios.get(`${url}/api/food/list`);
+      setFoodList(response.data?.data || []);
+    } catch (error) {
+      console.error("Failed to fetch food list", error);
+      setFoodList([]);
+    }
   };
 
   // Fetch food list and cart data when token is available
@@ -74,12 +81,16 @@ export default function StoreContextProvider(props) {
 
   // Function to load cart data from the server
   const loadCartData = async (token) => {
-    const response = await axios.post(
-      `${url}/api/cart/get`,
-      {},
-      { headers: { token } },
-    );
-    setCartItems(response.data.cartData);
+    try {
+      const response = await axios.post(
+        `${url}/api/cart/get`,
+        {},
+        { headers: { token } },
+      );
+      setCartItems(response.data?.cartData || {});
+    } catch (error) {
+      console.error("Failed to load cart data", error);
+    }
   };
 
   // Function to get the total amount of the cart

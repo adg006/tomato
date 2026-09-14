@@ -18,7 +18,7 @@ const List = ({ url }) => {
 
   useEffect(() => {
     fetchList();
-  }, [list]);
+  }, []);
 
   const removeFood = async (id) => {
     const response = await axios.post(`${url}/api/food/remove`, {
@@ -32,8 +32,6 @@ const List = ({ url }) => {
       toast.error("Error");
     }
   };
-
-  const List = () => {};
 
   return (
     <div className="list add flex-col">

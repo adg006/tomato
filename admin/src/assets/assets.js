@@ -14,4 +14,6 @@ export const assets ={
     parcel_icon
 }
 
-export const url = 'https://tomato-backend-hyy6.onrender.com'
+export const url =
+  import.meta.env.VITE_BACKEND_URL ||
+  "https://tomato-backend-ten.vercel.app";
