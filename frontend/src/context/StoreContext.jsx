@@ -8,7 +8,7 @@ export default function StoreContextProvider(props) {
   const [food_list, setFoodList] = useState([]);
   const [token, setToken] = useState();
 
-  const url = "https://tomato-backend-hyy6.onrender.com";
+  const url = process.env.BACKEND_URL;
 
   // Fetch food list from the server
   const fetchFoodList = async () => {
@@ -54,7 +54,7 @@ export default function StoreContextProvider(props) {
       await axios.post(
         `${url}/api/cart/add`,
         { itemId },
-        { headers: { token } }
+        { headers: { token } },
       );
     }
   };
@@ -67,7 +67,7 @@ export default function StoreContextProvider(props) {
       await axios.post(
         `${url}/api/cart/remove`,
         { itemId },
-        { headers: { token } }
+        { headers: { token } },
       );
     }
   };
@@ -77,7 +77,7 @@ export default function StoreContextProvider(props) {
     const response = await axios.post(
       `${url}/api/cart/get`,
       {},
-      { headers: { token } }
+      { headers: { token } },
     );
     setCartItems(response.data.cartData);
   };
