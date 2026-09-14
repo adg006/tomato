@@ -5,12 +5,16 @@ import {
   listFood,
   removeFood,
 } from "../controllers/foodController.js";
+import { ensureUploadDir, uploadDir } from "../config/uploads.js";
 
 const foodRouter = express.Router();
 
-// Set up multer for file uploads
+// destination must be a function so multer does not mkdir at import time
 const storage = multer.diskStorage({
-  destination: "uploads",
+  destination: (req, file, cb) => {
+    ensureUploadDir();
+    cb(null, uploadDir);
+  },
   filename: (req, file, cb) => {
     return cb(null, `${Date.now()}${file.originalname}`);
   },
