@@ -8,7 +8,7 @@ export default function StoreContextProvider(props) {
   const [food_list, setFoodList] = useState([]);
   const [token, setToken] = useState();
 
-  const url = process.env.BACKEND_URL;
+  const url = import.meta.env.VITE_BACKEND_URL;
 
   // Fetch food list from the server
   const fetchFoodList = async () => {
@@ -89,7 +89,9 @@ export default function StoreContextProvider(props) {
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
         let itemInfo = food_list.find((product) => product._id === item);
-        total += itemInfo.price * cartItems[item];
+        if (itemInfo) {
+          total += itemInfo.price * cartItems[item];
+        }
       }
     }
 
