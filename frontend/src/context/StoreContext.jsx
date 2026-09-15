@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+
 import axios from "axios";
 
 export const StoreContext = createContext(null);
@@ -9,8 +10,7 @@ export default function StoreContextProvider(props) {
   const [token, setToken] = useState();
 
   const url =
-    import.meta.env.VITE_BACKEND_URL ||
-    "https://tomato-backend-ten.vercel.app";
+    import.meta.env.VITE_BACKEND_URL || "https://tomato-backend-ten.vercel.app";
 
   // Fetch food list from the server
   const fetchFoodList = async () => {

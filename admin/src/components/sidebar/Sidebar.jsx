@@ -1,5 +1,7 @@
 import { NavLink } from "react-router-dom";
+
 import { assets } from "../../assets/assets";
+
 import "./sidebar.css";
 
 const Sidebar = () => {

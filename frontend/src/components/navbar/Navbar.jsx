@@ -1,7 +1,9 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import { assets } from "../../assets/assets.js";
 import { StoreContext } from "../../context/StoreContext.jsx";
+
 import "./navbar.css";
 
 export default function Navbar({ setShowLogin }) {

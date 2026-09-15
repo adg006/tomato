@@ -1,17 +1,18 @@
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 
 import Navbar from "./components/navbar/Navbar.jsx";
 import Sidebar from "./components/sidebar/Sidebar.jsx";
+
 import Add from "./pages/add/Add.jsx";
 import List from "./pages/list/List.jsx";
 import Orders from "./pages/orders/Orders.jsx";
 
 const App = () => {
   const url =
-    import.meta.env.VITE_BACKEND_URL ||
-    "https://tomato-backend-ten.vercel.app";
+    import.meta.env.VITE_BACKEND_URL || "https://tomato-backend-ten.vercel.app";
 
   return (
     <div>

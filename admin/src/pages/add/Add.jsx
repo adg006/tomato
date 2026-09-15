@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
+
 import axios from "axios";
+
 import { assets } from "../../assets/assets";
+
 import "./add.css";
 
 const Add = ({ url }) => {

@@ -1,4 +1,5 @@
 import { menu_list } from "../../assets/assets.js";
+
 import "./menu.css";
 
 export default function Menu({ category, setCategory }) {
@@ -17,7 +18,7 @@ export default function Menu({ category, setCategory }) {
             <div
               onClick={() =>
                 setCategory((prev) =>
-                  prev === item.menu_name ? "all" : item.menu_name
+                  prev === item.menu_name ? "all" : item.menu_name,
                 )
               }
               key={index}

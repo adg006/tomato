@@ -1,7 +1,10 @@
 import { useContext, useState } from "react";
 import axios from "axios";
+
 import { assets } from "../../assets/assets";
+
 import { StoreContext } from "../../context/StoreContext";
+
 import "./login.css";
 
 const Login = ({ setShowLogin }) => {

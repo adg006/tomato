@@ -1,21 +1,27 @@
+import { deleteFromImageKit, uploadToImageKit } from "../config/imagekit.js";
+
 import foodModel from "../models/foodModel.js";
-import fs from "fs";
-import path from "path";
-import { uploadDir } from "../config/uploads.js";
 
-// Function to add food item
 const addFood = async (req, res) => {
-  let image_filename = `${req.file.filename}`;
-
-  const food = new foodModel({
-    name: req.body.name,
-    description: req.body.description,
-    price: req.body.price,
-    image: image_filename,
-    category: req.body.category,
-  });
-
   try {
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: "Image is required",
+      });
+    }
+
+    const { url, fileId } = await uploadToImageKit(req.file);
+
+    const food = new foodModel({
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
+      image: url,
+      imageFileId: fileId,
+      category: req.body.category,
+    });
+
     await food.save();
     res.json({ success: true, message: "Food added successfully" });
   } catch (error) {
@@ -27,7 +33,6 @@ const addFood = async (req, res) => {
   }
 };
 
-// Function to list all food items
 const listFood = async (req, res) => {
   try {
     const foods = await foodModel.find({});
@@ -41,14 +46,21 @@ const listFood = async (req, res) => {
   }
 };
 
-// Function to remove food item
 const removeFood = async (req, res) => {
   const foodId = req.body.id;
 
   try {
     const foodItem = await foodModel.findById(foodId);
-    fs.unlink(path.join(uploadDir, foodItem.image), () => {});
+    if (!foodItem) {
+      return res.status(404).json({
+        success: false,
+        message: "Food item not found",
+      });
+    }
+
+    await deleteFromImageKit(foodItem.imageFileId);
     await foodModel.findByIdAndDelete(foodId);
+
     res.json({ success: true, message: "Food item removed successfully" });
   } catch (error) {
     res.status(500).json({

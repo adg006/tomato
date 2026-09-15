@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
+
+import axios from "axios";
+
 import { assets } from "../../assets/assets";
+
 import "./orders.css";
 
 const Orders = ({ url }) => {

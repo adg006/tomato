@@ -1,4 +1,5 @@
 import { assets } from "../../assets/assets.js";
+
 import "./footer.css";
 
 const Footer = () => {

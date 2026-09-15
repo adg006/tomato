@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+
 import axios from "axios";
+
 import "./list.css";
 
 const List = ({ url }) => {
@@ -48,7 +50,14 @@ const List = ({ url }) => {
         {list.map((item, index) => {
           return (
             <div className="list-table-format" key={index}>
-              <img src={`${url}/images/${item.image}`} alt="" />
+              <img
+                src={
+                  item.image.startsWith("http")
+                    ? item.image
+                    : `${url}/images/${item.image}`
+                }
+                alt=""
+              />
               <p>{item.name}</p>
               <p>{item.category}</p>
               <p>${item.price}</p>

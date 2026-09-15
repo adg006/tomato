@@ -1,8 +1,11 @@
 import { useState, useEffect, useContext } from "react";
+
 import axios from "axios";
+
 import { StoreContext } from "../../context/StoreContext";
-import "./myorders.css";
 import { assets } from "../../assets/assets";
+
+import "./myorders.css";
 
 const MyOrders = () => {
   const [data, setData] = useState([]);
@@ -13,7 +16,7 @@ const MyOrders = () => {
     const response = await axios.post(
       `${url}/api/order/userorders`,
       {},
-      { headers: { token } }
+      { headers: { token } },
     );
     if (response.data.success) {
       setData(response.data.data);

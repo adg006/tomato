@@ -1,26 +1,19 @@
 import express from "express";
 import multer from "multer";
+
 import {
   addFood,
   listFood,
   removeFood,
 } from "../controllers/foodController.js";
-import { ensureUploadDir, uploadDir } from "../config/uploads.js";
 
 const foodRouter = express.Router();
 
-// destination must be a function so multer does not mkdir at import time
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    ensureUploadDir();
-    cb(null, uploadDir);
-  },
-  filename: (req, file, cb) => {
-    return cb(null, `${Date.now()}${file.originalname}`);
-  },
+// Keep file in memory and stream it to Cloudflare R2
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 5 * 1024 * 1024 },
 });
-
-const upload = multer({ storage: storage });
 
 foodRouter.post("/add", upload.single("image"), addFood);
 foodRouter.get("/list", listFood);
